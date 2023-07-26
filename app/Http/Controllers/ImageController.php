@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ImageModel;
 use DB;
-
 class ImageController extends Controller
 {
     public function store(Request $request)
