@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tanaman', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_tanaman')->autoIncrement();
+            $table->string('lahan', 100);
+            $table->string('dataran', 100);
             $table->string('saran_tanaman', 255);
             $table->timestamps();
+            // $table->foreign('id_tanaman')->references('id')->on('image')->onDelete('cascade');
         });
     }
 

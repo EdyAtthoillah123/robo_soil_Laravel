@@ -183,7 +183,8 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="ttl">Saran Tanaman</label>
-                                        <textarea type="text" name="tanaman" class="form-control" required="" autocomplete="off"></textarea>
+                                        <input type="text" name="tanaman" class="form-control" required=""
+                                            autocomplete="off">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
@@ -248,7 +249,8 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="ttl">Saran Perbaikan</label>
-                                        <textarea type="text" name="perbaikan" class="form-control" required="" autocomplete="off"></textarea>
+                                        <input type="text" name="perbaikan" class="form-control" required=""
+                                            autocomplete="off">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>

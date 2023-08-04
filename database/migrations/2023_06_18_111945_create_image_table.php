@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('image', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
             $table->string('imagepath', 255);
             $table->string('nitrogen', 30)->nullable();
             $table->string('phosporus', 30)->nullable();
             $table->string('kalium', 30)->nullable();
             $table->timestamps();
-            // $table->unsignedBigInteger('id_user');
-            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

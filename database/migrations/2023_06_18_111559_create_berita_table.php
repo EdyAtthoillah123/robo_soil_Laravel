@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('image', 255)->nullable()->default('text');
             $table->string('title', 255)->nullable()->default('text');
             $table->text('description')->nullable()->default('text');
-            // $table->date('date')->nullable()->default(new DateTime());
             $table->timestamps();
         });
     }

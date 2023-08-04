@@ -35,34 +35,34 @@ class AuthController extends Controller
 }
 
 
-public function login(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    if (Auth::attempt($request->only('email', 'password'))) {
-        $user = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user();
+            // $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Login successful',
+                // 'token' => $token,
+                'user' => $user,
+            ], 200);
+        }
 
         return response()->json([
-            'message' => 'Login successful',
-            'token' => $token,
-            'user' => $user,
-        ], 200);
+            'message' => 'Invalid credentials',
+        ], 401);
     }
 
-    return response()->json([
-        'message' => 'Invalid credentials',
-    ], 401);
-}
 
-
-public function __construct()
-{
-    $this->middleware('auth:sanctum')->except(['register', 'login']);
-}
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['register', 'login']);
+    }
 
 }
 
