@@ -9,5 +9,5 @@ class TanamanModel extends Model
 {
     protected $table = 'tanaman';
 
-    protected $fillable = ['saran_tanaman'];
+    protected $fillable = ['lahan', 'saran_tanaman','dataran'];
 }

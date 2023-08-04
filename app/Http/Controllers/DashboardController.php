@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Http\Requests\TanamanRequest;
 
 use App\Models\BeritaModel;
 use App\Models\PerbaikanModel;
@@ -12,8 +13,8 @@ class DashboardController extends Controller
 
     public function dashboard(){
         // $profile = ProfileModel::all();
-        $tanaman = TanamanModel::orderBy('id','desc')->get();
-        $perbaikan = PerbaikanModel::orderBy('id','desc')->get();
+        $tanaman = TanamanModel::orderBy('id_tanaman','desc')->get();
+        $perbaikan = PerbaikanModel::orderBy('id_perbaikan','desc')->get();
         $data = BeritaModel::orderBy('id','desc')->get();
         return view('dashboard', compact('data', 'tanaman', 'perbaikan'));
     }
@@ -46,10 +47,9 @@ class DashboardController extends Controller
         ]);
         return redirect('/dashboard#berita');
     }
-    public function storetanaman(Request $request){
-        $data = TanamanModel::create([
-            'saran_tanaman' => $request->tanaman,
-        ]);
+    public function storetanaman(TanamanRequest $request){
+        $validator = $request->validated();
+        $data = TanamanModel::create($validator);
         return redirect('/dashboard#tanaman');
     }
     public function storeperbaikan(Request $request){
@@ -64,7 +64,7 @@ class DashboardController extends Controller
         return redirect('/dashboard#berita');
     }
     public function deletetanaman($id){
-        $data = TanamanModel::destroy($id);
+        $data = TanamanModel::where('id_tanaman', $id)->delete();
         return redirect('/dashboard#tanaman');
     }
     public function deleteperbaikan($id){
@@ -72,12 +72,10 @@ class DashboardController extends Controller
         return redirect('/dashboard#perbaikan');
     }
 
-    public function updatetanaman(Request $request)
+    public function updatetanaman(TanamanRequest $request, $id)
     {
-        $data = TanamanModel::where('id', $request->id);
-        $data->update([
-            'saran_tanaman' => $request->tanaman,
-        ]);
+        $validator = $request->validated();
+        $data = TanamanModel::where('id_tanaman', $id)->update($validator);
         return redirect('/dashboard#tanaman');
     }
 

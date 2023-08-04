@@ -147,6 +147,8 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Saran Tanaman</th>
+                                                <th>Dataran</th>
+                                                <th>Jenis Lahan</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -155,15 +157,17 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $value->saran_tanaman }}</td>
+                                                    <td>{{ $value->dataran }}</td>
+                                                    <td>{{ $value->lahan }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group"
                                                             aria-label="Tombol Edit dan Hapus">
                                                             <a class="btn btn-warning fa fa-pencil"
                                                                 data-toggle="modal"
-                                                                data-target="#ModalTanaman{{ $value->id }}"
+                                                                data-target="#ModalTanaman{{ $value->id_tanaman }}"
                                                                 style="color: white;"></a>
                                                             <a class="btn btn-danger fa fa-trash"
-                                                                href="{{ url('hapustanaman/' . $value->id) }}"></a>
+                                                                href="{{ url('hapustanaman/' . $value->id_tanaman) }}"></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -183,8 +187,42 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="ttl">Saran Tanaman</label>
-                                        <input type="text" name="tanaman" class="form-control" required=""
-                                            autocomplete="off">
+                                        <input type="text" name="saran_tanaman"
+                                            class="form-control @error('saran_tanaman') is-invalid @enderror"
+                                            value="{{ old('saran_tanaman') }}" autocomplete="off">
+                                        @error('saran_tanaman')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Dataran</label>
+                                        <div class="col">
+                                            <select class="form-control @error('dataran') is-invalid @enderror"
+                                                name="dataran" autocomplete="off" id="exampleFormControlSelect1">
+                                                <option value="pilih">Pilih
+                                                </option>
+                                                <option  value="Dataran Rendah"
+                                                    {{ 'Dataran Rendah' === old('dataran') ? 'selected' : '' }}>
+                                                    Dataran Rendah
+                                                </option>
+                                                <option value="Dataran Tinggi"
+                                                    {{ 'Dataran Tinggi' === old('dataran') ? 'selected' : '' }}>
+                                                    Dataran Tinggi
+                                                </option>
+                                            </select>
+                                            @error('dataran')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ttl">Jenis Lahan</label>
+                                        <input type="text" name="lahan"
+                                            class="form-control @error('lahan') is-invalid @enderror"
+                                            value="{{ old('lahan') }}" autocomplete="off">
+                                        @error('lahan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
@@ -249,8 +287,11 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="ttl">Saran Perbaikan</label>
-                                        <input type="text" name="perbaikan" class="form-control" required=""
-                                            autocomplete="off">
+                                        <input type="text" name="perbaikan" class="form-control @error('perbaikan') is-invalid @enderror"
+                                        value="{{ old('perbaikan') }}" autocomplete="off">
+                                        @error('perbaikan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
@@ -263,7 +304,7 @@
     </div>
 
     @foreach ($tanaman as $value)
-        <div class="modal fade" id="ModalTanaman{{ $value->id }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="ModalTanaman{{ $value->id_tanaman }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -273,13 +314,47 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ url('edittanaman/' . $value->id) }}" method="post">
+                    <form action="{{ url('edittanaman/' . $value->id_tanaman) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="ttl">Saran Tanaman</label>
-                                <input type="text" name="tanaman" class="form-control" required=""
-                                    value="{{ $value->saran_tanaman }}" autocomplete="off">
+                                <input type="text" name="saran_tanaman"
+                                    class="form-control @error('saran_tanaman') is-invalid @enderror"
+                                    value="{{ old('saran_tanaman', $value->saran_tanaman) }}" autocomplete="off">
+                                @error('saran_tanaman')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Dataran</label>
+                                <div class="col">
+                                    <select class="form-control @error('dataran') is-invalid @enderror"
+                                        name="dataran" autocomplete="off" id="exampleFormControlSelect1">
+                                        <option value="{{$value->dataran}}">{{$value->dataran}}
+                                        </option>
+                                        <option  value="Dataran Rendah"
+                                            {{ 'Dataran Rendah' === old('dataran') ? 'selected' : '' }}>
+                                            Dataran Rendah
+                                        </option>
+                                        <option value="Dataran Tinggi"
+                                            {{ 'Dataran Tinggi' === old('dataran') ? 'selected' : '' }}>
+                                            Dataran Tinggi
+                                        </option>
+                                    </select>
+                                    @error('dataran')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ttl">Jenis Lahan</label>
+                                <input type="text" name="lahan"
+                                    class="form-control @error('lahan') is-invalid @enderror"
+                                    value="{{ old('lahan', $value->lahan) }}" autocomplete="off">
+                                @error('lahan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -292,7 +367,7 @@
     @endforeach
 
     @foreach ($perbaikan as $value)
-        <div class="modal fade" id="ModalPerbaikan{{ $value->id }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="ModalPerbaikan{{ $value->id_tanaman }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -307,10 +382,43 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="ttl">Saran Tanaman</label>
-                                <input type="text" name="tanaman" class="form-control" required=""
-                                    value="{{ $value->saran_perbaikan }}" autocomplete="off">
+                                <input type="text" name="saran_tanaman"
+                                    class="form-control @error('saran_tanaman') is-invalid @enderror"
+                                    value="{{ old('saran_tanaman') }}" autocomplete="off">
+                                @error('saran_tanaman')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label>Dataran</label>
+                                <div class="col">
+                                    <select class="form-control @error('dataran') is-invalid @enderror"
+                                        name="dataran" autocomplete="off" id="exampleFormControlSelect1">
+                                        <option value="pilih">Pilih
+                                        </option>
+                                        <option  value="Dataran Rendah"
+                                            {{ 'Dataran Rendah' === old('dataran') ? 'selected' : '' }}>
+                                            Dataran Rendah
+                                        </option>
+                                        <option value="Dataran Tinggi"
+                                            {{ 'Dataran Tinggi' === old('dataran') ? 'selected' : '' }}>
+                                            Dataran Tinggi
+                                        </option>
+                                    </select>
+                                    @error('dataran')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ttl">Jenis Lahan</label>
+                                <input type="text" name="lahan"
+                                    class="form-control @error('lahan') is-invalid @enderror"
+                                    value="{{ old('lahan') }}" autocomplete="off">
+                                @error('lahan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
@@ -390,3 +498,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
+</script>
