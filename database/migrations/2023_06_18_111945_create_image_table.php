@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('nitrogen', 30)->nullable();
             $table->string('phosporus', 30)->nullable();
             $table->string('kalium', 30)->nullable();
+            $table->string('dataran', 30)->nullable();
+            $table->string('lahan', 30)->nullable();
+            $table->string('tanaman', 30)->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

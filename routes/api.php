@@ -21,7 +21,7 @@ use App\Http\Controllers\BeritaController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/images', [ImageController::class, 'store']);
-Route::get('/rekap', [ImageController::class, 'index']);
+Route::get('/rekap/{id}', [ImageController::class, 'index']);
 Route::get('/berita', [BeritaController::class, 'index']);
 
 

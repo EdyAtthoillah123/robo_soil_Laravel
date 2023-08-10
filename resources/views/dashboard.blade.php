@@ -197,16 +197,17 @@
                                     <div class="form-group">
                                         <label>Dataran</label>
                                         <div class="col">
-                                            <select class="form-control @error('dataran') is-invalid @enderror"
+                                            <select style="font-size: 14px;"
+                                                class="form-control @error('dataran') is-invalid @enderror"
                                                 name="dataran" autocomplete="off" id="exampleFormControlSelect1">
                                                 <option value="pilih">Pilih
                                                 </option>
-                                                <option  value="Dataran Rendah"
-                                                    {{ 'Dataran Rendah' === old('dataran') ? 'selected' : '' }}>
+                                                <option value="Rendah"
+                                                    {{ 'Rendah' === old('dataran') ? 'selected' : '' }}>
                                                     Dataran Rendah
                                                 </option>
-                                                <option value="Dataran Tinggi"
-                                                    {{ 'Dataran Tinggi' === old('dataran') ? 'selected' : '' }}>
+                                                <option value="Tinggi"
+                                                    {{ 'Tinggi' === old('dataran') ? 'selected' : '' }}>
                                                     Dataran Tinggi
                                                 </option>
                                             </select>
@@ -216,13 +217,26 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="ttl">Jenis Lahan</label>
-                                        <input type="text" name="lahan"
-                                            class="form-control @error('lahan') is-invalid @enderror"
-                                            value="{{ old('lahan') }}" autocomplete="off">
-                                        @error('lahan')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                        <label>Lahan</label>
+                                        <div class="col">
+                                            <select style="font-size: 14px;"
+                                                class="form-control @error('lahan') is-invalid @enderror"
+                                                name="lahan" autocomplete="off" id="exampleFormControlSelect1">
+                                                <option value="pilih">Pilih
+                                                </option>
+                                                <option value="Basah"
+                                                    {{ 'Basah' === old('lahan') ? 'selected' : '' }}>
+                                                    Basah
+                                                </option>
+                                                <option value="Kering"
+                                                    {{ 'Kering' === old('lahan') ? 'selected' : '' }}>
+                                                    Kering
+                                                </option>
+                                            </select>
+                                            @error('lahan')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
@@ -287,11 +301,12 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="ttl">Saran Perbaikan</label>
-                                        <input type="text" name="perbaikan" class="form-control @error('perbaikan') is-invalid @enderror"
-                                        value="{{ old('perbaikan') }}" autocomplete="off">
+                                        <input type="text" name="perbaikan"
+                                            class="form-control @error('perbaikan') is-invalid @enderror"
+                                            value="{{ old('perbaikan') }}" autocomplete="off">
                                         @error('perbaikan')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
@@ -329,16 +344,14 @@
                             <div class="form-group">
                                 <label>Dataran</label>
                                 <div class="col">
-                                    <select class="form-control @error('dataran') is-invalid @enderror"
-                                        name="dataran" autocomplete="off" id="exampleFormControlSelect1">
-                                        <option value="{{$value->dataran}}">{{$value->dataran}}
+                                    <select class="form-control @error('dataran') is-invalid @enderror" name="dataran"
+                                        autocomplete="off" id="exampleFormControlSelect1">
+                                        <option value="{{ $value->dataran }}">{{ $value->dataran }}
                                         </option>
-                                        <option  value="Dataran Rendah"
-                                            {{ 'Dataran Rendah' === old('dataran') ? 'selected' : '' }}>
+                                        <option value="Rendah" {{ 'Rendah' === old('dataran') ? 'selected' : '' }}>
                                             Dataran Rendah
                                         </option>
-                                        <option value="Dataran Tinggi"
-                                            {{ 'Dataran Tinggi' === old('dataran') ? 'selected' : '' }}>
+                                        <option value="Tinggi" {{ 'Tinggi' === old('dataran') ? 'selected' : '' }}>
                                             Dataran Tinggi
                                         </option>
                                     </select>
@@ -348,13 +361,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="ttl">Jenis Lahan</label>
-                                <input type="text" name="lahan"
-                                    class="form-control @error('lahan') is-invalid @enderror"
-                                    value="{{ old('lahan', $value->lahan) }}" autocomplete="off">
-                                @error('lahan')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <label>Jenis Lahan</label>
+                                <div class="col">
+                                    <select class="form-control @error('lahan') is-invalid @enderror" name="lahan"
+                                        autocomplete="off" id="exampleFormControlSelect1">
+                                        <option value="{{ $value->lahan }}">{{ $value->lahan }}
+                                        </option>
+                                        <option value="Basah" {{ 'Basah' === old('lahan') ? 'selected' : '' }}>
+                                            Basah
+                                        </option>
+                                        <option value="Kering" {{ 'Kering' === old('lahan') ? 'selected' : '' }}>
+                                            Kering
+                                        </option>
+                                    </select>
+                                    @error('lahan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -392,11 +415,11 @@
                             <div class="form-group">
                                 <label>Dataran</label>
                                 <div class="col">
-                                    <select class="form-control @error('dataran') is-invalid @enderror"
-                                        name="dataran" autocomplete="off" id="exampleFormControlSelect1">
+                                    <select class="form-control @error('dataran') is-invalid @enderror" name="dataran"
+                                        autocomplete="off" id="exampleFormControlSelect1">
                                         <option value="pilih">Pilih
                                         </option>
-                                        <option  value="Dataran Rendah"
+                                        <option value="Dataran Rendah"
                                             {{ 'Dataran Rendah' === old('dataran') ? 'selected' : '' }}>
                                             Dataran Rendah
                                         </option>
@@ -419,9 +442,9 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
                     </form>
                 </div>
             </div>

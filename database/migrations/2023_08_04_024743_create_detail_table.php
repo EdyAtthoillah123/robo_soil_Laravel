@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->unsignedBigInteger('id_tanaman');
-            $table->foreign('id_tanaman')->references('id_tanaman')->on('tanaman')->onDelete('cascade');
-            $table->unsignedBigInteger('id_perbaikan');
-            $table->foreign('id_perbaikan')->references('id_perbaikan')->on('perbaikan')->onDelete('cascade');
-            $table->unsignedBigInteger('id_image');
-            $table->foreign('id_image')->references('id')->on('image')->onDelete('cascade');
-            $table->timestamps();
-        });
+        // Schema::create('detail', function (Blueprint $table) {
+        //     $table->id()->autoIncrement();
+        //     $table->unsignedBigInteger('id_tanaman');
+        //     $table->foreign('id_tanaman')->references('id_tanaman')->on('tanaman')->onDelete('cascade');
+        //     $table->unsignedBigInteger('id_perbaikan');
+        //     $table->foreign('id_perbaikan')->references('id_perbaikan')->on('perbaikan')->onDelete('cascade');
+        //     $table->unsignedBigInteger('id_image');
+        //     $table->foreign('id_image')->references('id')->on('image')->onDelete('cascade');
+        //     $table->timestamps();
+        // });
     }
 
     /**

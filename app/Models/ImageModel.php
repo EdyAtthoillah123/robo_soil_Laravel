@@ -9,7 +9,7 @@ class ImageModel extends Model
 {
     protected $table = 'rekap';
 
-    protected $fillable = 'image';
+    protected $fillable = '*';
 
-    
+
 }
